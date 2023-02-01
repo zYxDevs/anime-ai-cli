@@ -23,7 +23,7 @@ class AnimePost:
         base64_image = image_to_base64(filename)
         post_data = AnimePost(images=[base64_image])
         post_str = json.dumps(post_data.__dict__)
-        url = f'https://h5.tu.qq.com{str(len(post_str))}HQ31X02e'.encode()
+        url = f'https://h5.tu.qq.com{len(post_str)}HQ31X02e'.encode()
         sign_value = hashlib.md5(url).hexdigest()
         headers = {
         'Host': 'ai.tu.qq.com',
@@ -33,5 +33,4 @@ class AnimePost:
         }
         res = requests.post(post_url, headers=headers, json=post_data.__dict__)
         json_data = res.json()
-        anime = AnimeResponse(**json_data) 
-        return anime
+        return AnimeResponse(**json_data)
